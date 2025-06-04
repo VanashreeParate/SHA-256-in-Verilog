@@ -443,22 +443,22 @@ endfunction
 
 function [31:0] lowercase_sigma_0_output(input [31:0] x);
     lowercase_sigma_0_output = {x[6:0], x[31:7]} ^ {x[17:0], x[31:18]} ^ (x >> 3);
-//    ?0(x)=ROTR7(x)?ROTR18(x)?SHR3(x)
+//    σ0(x)=ROTR7(x)?ROTR18(x)?SHR3(x)
 endfunction
 
 function [31:0] lowercase_sigma_1_output(input [31:0] x);
     lowercase_sigma_1_output = {x[16:0], x[31:17]} ^ {x[18:0], x[31:19]} ^ (x >> 10);
-//    ?1(x)=ROTR17(x)?ROTR19(x)?SHR10(x)
+//    σ1(x)=ROTR17(x)?ROTR19(x)?SHR10(x)
 endfunction
 
 function [31:0] uppercase_sigma_0_output(input [31:0] x);
     uppercase_sigma_0_output = {x[1:0], x[31:2]} ^ {x[12:0], x[31:13]} ^ {x[21:0], x[31:22]};
-//    ?0(x) = ROTR2(x)?ROTR13(x)?ROTR22(x)
+//    Σ0(x) = ROTR2(x)?ROTR13(x)?ROTR22(x)
 endfunction
 
 function [31:0] uppercase_sigma_1_output(input [31:0] x);
     uppercase_sigma_1_output = {x[5:0], x[31:6]} ^ {x[10:0], x[31:11]} ^ {x[24:0], x[31:25]};
-//    ?1(x) = ROTR6(x)?ROTR11(x)?ROTR25(x) 
+//    Σ1(x) = ROTR6(x)?ROTR11(x)?ROTR25(x) 
 endfunction
 
 function automatic [31:0] get_K;
