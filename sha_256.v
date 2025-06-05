@@ -20,10 +20,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sha_256(clk, rst, data_in, digest);
+module sha_256 #(parameter input_width = 24) (clk, rst, data_in, digest);
 input clk;
 input rst;
-input [23:0] data_in;
+input [input_width-1:0] data_in;
 output reg [255:0] digest;
 
 reg [511:0] msg_block; //message block of 512 bits
@@ -31,13 +31,14 @@ reg [31:0] word [0:63]; //64 words of 32 bits each
 reg [31:0] H [0:7]; //final hash values
 reg [31:0] h_1_2 [0:7]; //initial hash values
 integer i;
+parameter zeroes_padding = 447 - input_width; //512-(64 bits for length + 1'b1 padded) = 447(= input_width+zeroes_padded)
 
 //stage 1 : msg_block and W0 to W15
 always@(posedge clk)
 begin
     if(rst)
     begin
-        msg_block <= {data_in, 1'b1, {423{1'b0}}, 64'd24}; //msg block initialised
+        msg_block <= {data_in, 1'b1, {zeroes_padding{1'b0}}, 64'd24}; //msg block initialised
         h_1_2[0] = 32'h6a09e667;
         h_1_2[1] = 32'hbb67ae85;
         h_1_2[2] = 32'h3c6ef372;
