@@ -35,7 +35,7 @@ wire [31:0] h_2_temp [0:7] = uut.h_2_temp;
 wire [31:0] h_9_10 [0:7] = uut.h_9_10;
 wire [31:0] h_10_temp [0:7] = uut.h_10_temp;
 
-always #34 clk=~clk ; //14,705MHz T=68ns
+always #34 clk=~clk ; //14.705MHz T=68ns
 
 initial
 begin
